@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/todo")
 public class TodoController {
     @Autowired
-    TodoServiceImpl todoService;
+    private TodoServiceImpl todoService;
 
     /**
      * Get todolist
