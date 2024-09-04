@@ -6,15 +6,15 @@ public class TodoDto {
     private String todoId;
     private Date createdTime;
     private String content;
-    private Date deadLine;
+    private Date deadline;
     private boolean isDone;
     private String priority;
 
-    public TodoDto(String todoId, Date createdTime, String content, Date deadLine, boolean isDone, String priority) {
+    public TodoDto(String todoId, Date createdTime, String content, Date deadline, boolean isDone, String priority) {
         this.todoId = todoId;
         this.createdTime = createdTime;
         this.content = content;
-        this.deadLine = deadLine;
+        this.deadline = deadline;
         this.isDone = isDone;
         this.priority = priority;
     }
@@ -43,12 +43,12 @@ public class TodoDto {
         this.content = content;
     }
 
-    public Date getDeadLine() {
-        return deadLine;
+    public Date getDeadline() {
+        return deadline;
     }
 
-    public void setDeadLine(Date deadLine) {
-        this.deadLine = deadLine;
+    public void setDeadline(Date deadline) {
+        this.deadline = deadline;
     }
 
     public boolean isDone() {

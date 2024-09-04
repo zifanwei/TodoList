@@ -2,9 +2,11 @@ package com.example.demo.serviceimpl;
 
 import com.example.demo.model.ResponseVo;
 import com.example.demo.model.TodoDto;
+import org.springframework.stereotype.Service;
 
 import java.util.Objects;
 
+@Service
 public class TodoService implements TodoServiceImpl {
     @Override
     public ResponseVo<TodoDto> getTodoList(String userId, boolean isDone) {
