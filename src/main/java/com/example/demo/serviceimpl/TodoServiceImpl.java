@@ -7,5 +7,5 @@ public interface TodoServiceImpl {
     ResponseVo<TodoDto> getTodoList(String userId, boolean isDone);
     ResponseVo<TodoDto> addTodoItem(TodoDto todoDto);
     ResponseVo<TodoDto> updateTodoItem(TodoDto todoDto);
-    ResponseVo<TodoDto> deleteTodoItem(String todoId);
+    ResponseVo<TodoDto> deleteTodoItem(String todoId, String userId);
 }

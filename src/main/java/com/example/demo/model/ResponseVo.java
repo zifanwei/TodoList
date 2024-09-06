@@ -27,9 +27,9 @@ public class ResponseVo<T> {
         return this;
     }
 
-    public ResponseVo<T> failed() {
-        this.message = ResponseEnum.FAILED.message;
+    public ResponseVo<T> failed(String message) {
         this.statusCode = ResponseEnum.FAILED.code;
+        this.message = message;
         return this;
     }
 

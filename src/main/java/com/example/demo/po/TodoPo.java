@@ -41,8 +41,8 @@ public class TodoPo {
         return new TodoDto(
                 this.id,
                 this.createdTime,
-                this.content,
                 this.deadline,
+                this.content,
                 this.isDone,
                 this.priority,
                 this.userId

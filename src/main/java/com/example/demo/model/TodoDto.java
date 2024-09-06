@@ -1,26 +1,47 @@
 package com.example.demo.model;
 
+import com.example.demo.po.TodoPo;
+import com.example.demo.util.CommonUtil;
+
 import java.util.Date;
 
 public class TodoDto {
     private String todoId;
     private Date createdTime;
-    private String content;
     private Date deadline;
+    private String content;
     private boolean isDone;
     private String priority;
     private String userId;
 
-    public TodoDto(String todoId, Date createdTime, String content,
-                   Date deadline, boolean isDone, String priority,
+    public TodoDto(String todoId, Date createdTime, Date deadline,
+                   String content, boolean isDone, String priority,
                    String userId) {
         this.todoId = todoId;
         this.createdTime = createdTime;
-        this.content = content;
         this.deadline = deadline;
+        this.content = content;
         this.isDone = isDone;
         this.priority = priority;
         this.userId = userId;
+    }
+
+    public void initialise() {
+        this.todoId = CommonUtil.getUUID32();
+        this.createdTime = new Date();
+        this.isDone = false;
+    }
+
+    public TodoPo toTodoPo() {
+        return new TodoPo(
+                this.todoId,
+                this.createdTime,
+                this.deadline,
+                this.content,
+                this.isDone,
+                this.priority,
+                this.userId
+        );
     }
 
     public String getUserId() {

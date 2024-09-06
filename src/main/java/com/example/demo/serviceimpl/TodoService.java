@@ -7,10 +7,7 @@ import com.example.demo.po.TodoPo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Collection;
-import java.util.Date;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -39,18 +36,40 @@ public class TodoService implements TodoServiceImpl {
     public ResponseVo<TodoDto> addTodoItem(TodoDto todoDto) {
         ResponseVo<TodoDto> responseVo = new ResponseVo<>();
         if (Objects.isNull(todoDto)) {
-            return responseVo.failed();
+            return responseVo.failed("Todo is null.");
         }
-        return null;
+        todoDto.initialise();
+        int affectedRows = todoDao.addTodoItem(todoDto.toTodoPo());
+        if (affectedRows <= 0) {
+            return responseVo.failed("Add Todo item failed.");
+        }
+        return responseVo.success(List.of(todoDto));
     }
 
     @Override
     public ResponseVo<TodoDto> updateTodoItem(TodoDto todoDto) {
-        return null;
+        ResponseVo<TodoDto> responseVo = new ResponseVo<>();
+        if (Objects.isNull(todoDto)) {
+            return responseVo.failed("Todo is null.");
+        }
+        // allow changing of content, deadline, priority and isDone.
+        int affectedRows = todoDao.updateTodoItem(todoDto.toTodoPo());
+        if (affectedRows <= 0) {
+            return responseVo.failed("update Todo item failed.");
+        }
+        return responseVo.success(List.of(todoDto));
     }
 
     @Override
-    public ResponseVo<TodoDto> deleteTodoItem(String todoId) {
-        return null;
+    public ResponseVo<TodoDto> deleteTodoItem(String todoId, String userId) {
+        ResponseVo<TodoDto> responseVo = new ResponseVo<>();
+        if (Objects.isNull(todoId) || todoId.isBlank()) {
+            return responseVo.failed("Todo Id is empty.");
+        }
+        int affectedRows = todoDao.deleteTodoItemById(todoId, userId);
+        if (affectedRows <= 0) {
+            return responseVo.failed("delete Todo item failed.");
+        }
+        return responseVo.success(null);
     }
 }

@@ -16,4 +16,36 @@
             </if>
         </where>
     </select>
+
+    <insert id="addTodoItem" parameterType="com.example.demo.po.TodoPo">
+        INSERT INTO todolist (id, createdtime, deadline, content, isdone, priority, userid)
+        VALUES (#{id}, #{createdTime}, #{deadline}, #{content}, #{isDone}, #{priority}, #{userId})
+    </insert>
+
+    <update id="updateTodoItem" parameterType="com.example.demo.po.TodoPo">
+        UPDATE todolist
+        <set>
+            <if test="createdTime != null">
+                createdtime = #{createdTime},
+            </if>
+            <if test="deadline != null">
+                deadline = #{deadline},
+            </if>
+            <if test="content != null and content != ''">
+                content = #{content},
+            </if>
+            <if test="isDone != null">
+                isdone = #{isDone},
+            </if>
+            <if test="priority != null and priority != ''">
+                priority = #{priority},
+            </if>
+        </set>
+        WHERE id = #{id}
+    </update>
+
+    <delete id="deleteTodoItemById" parameterType="java.lang.String">
+        DELETE FROM todolist
+        WHERE id = #{id} AND userid = #{userId}
+    </delete>
 </mapper>

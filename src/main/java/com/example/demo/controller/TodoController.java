@@ -43,7 +43,8 @@ public class TodoController {
      * delete an item by id
      */
     @RequestMapping(value="/delete", method= RequestMethod.DELETE)
-    public ResponseVo<TodoDto> delete(@RequestParam(name = "todo_id") String todoId) {
-        return todoService.deleteTodoItem(todoId);
+    public ResponseVo<TodoDto> delete(@RequestParam(name = "todo_id") String todoId,
+                                      @RequestParam(name = "user_id") String userId) {
+        return todoService.deleteTodoItem(todoId, userId);
     }
 }

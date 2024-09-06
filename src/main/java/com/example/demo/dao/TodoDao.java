@@ -8,4 +8,10 @@ import java.util.List;
 @Mapper
 public interface TodoDao {
     List<TodoPo> getTodoList(String userId, boolean isDone);
+
+    int addTodoItem(TodoPo toTodoPo);
+
+    int updateTodoItem(TodoPo toTodoPo);
+
+    int deleteTodoItemById(String id, String userId);
 }
