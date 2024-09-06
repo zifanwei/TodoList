@@ -66,6 +66,9 @@ public class TodoService implements TodoServiceImpl {
         if (Objects.isNull(todoId) || todoId.isBlank()) {
             return responseVo.failed("Todo Id is empty.");
         }
+        if (Objects.isNull(userId) || userId.isBlank()) {
+            return responseVo.failed("user Id is empty.");
+        }
         int affectedRows = todoDao.deleteTodoItemById(todoId, userId);
         if (affectedRows <= 0) {
             return responseVo.failed("delete Todo item failed.");

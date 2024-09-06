@@ -4,8 +4,12 @@ import com.example.demo.model.ResponseVo;
 import com.example.demo.model.TodoDto;
 import com.example.demo.serviceimpl.TodoServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.constraints.NotEmpty;
+
+@Validated
 @RestController
 @RequestMapping("/todo")
 public class TodoController {
@@ -18,7 +22,7 @@ public class TodoController {
      * @return ResponseVo<TodoDto>
      */
     @RequestMapping(value="/get", method= RequestMethod.GET)
-    public ResponseVo<TodoDto> get(@RequestParam(name = "user_id") String userId,
+    public ResponseVo<TodoDto> get(@NotEmpty(message = "userId cannot be empty!") @RequestParam(name = "user_id") String userId,
                                    @RequestParam(name = "is_done") boolean isDone) {
         return todoService.getTodoList(userId, isDone);
     }
