@@ -7,8 +7,11 @@ import com.example.demo.po.TodoPo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 @Service
 public class TodoService implements TodoServiceImpl {
@@ -22,15 +25,14 @@ public class TodoService implements TodoServiceImpl {
     @Override
     public ResponseVo<TodoDto> getTodoList(String userId, boolean isDone) {
         ResponseVo<TodoDto> responseVo = new ResponseVo<>();
-        /**
-         * TODO:
-         * get todolist that deadline is today.
-         */
-        List<TodoPo> todoList = todoDao.getTodoList();
+        List<TodoPo> todoList = todoDao.getTodoList(userId, isDone);
         if (todoList.isEmpty()) {
-            return responseVo.failed();
+            return responseVo.success(null);
         }
-        return null;
+        List<TodoDto> todoDtoList = todoList.stream()
+                .map(TodoPo::toDto)
+                .collect(Collectors.toList());
+        return responseVo.success(todoDtoList);
     }
 
     @Override

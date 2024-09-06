@@ -1,5 +1,6 @@
 package com.example.demo.po;
 
+import com.example.demo.model.TodoDto;
 import lombok.Data;
 import org.springframework.data.relational.core.mapping.Column;
 
@@ -10,27 +11,43 @@ public class TodoPo {
 
     private String id;
 
-    @Column("created_time")
     private Date createdTime;
 
     private Date deadline;
+
     private String content;
+
     private boolean isDone;
+
     private String priority;
+
+    private String userId;
 
     public TodoPo() {}
 
-    public TodoPo(String id, Date createdTime,
-                  Date deadline, String content,
-                  boolean isDone, String priority) {
+    public TodoPo(String id, Date createdTime, Date deadline,
+                  String content, boolean isDone, String priority,
+                  String userId) {
         this.id = id;
         this.createdTime = createdTime;
         this.deadline = deadline;
         this.content = content;
         this.isDone = isDone;
         this.priority = priority;
+        this.userId = userId;
     }
 
+    public TodoDto toDto() {
+        return new TodoDto(
+                this.id,
+                this.createdTime,
+                this.content,
+                this.deadline,
+                this.isDone,
+                this.priority,
+                this.userId
+        );
+    }
     public String getId() {
         return id;
     }
@@ -77,5 +94,13 @@ public class TodoPo {
 
     public void setPriority(String priority) {
         this.priority = priority;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 }

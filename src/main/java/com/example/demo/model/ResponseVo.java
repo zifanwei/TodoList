@@ -1,13 +1,16 @@
 package com.example.demo.model;
 
 import com.example.demo.constant.ResponseEnum;
+import org.apache.coyote.Response;
+
+import java.util.List;
 
 public class ResponseVo<T> {
     private String statusCode;
     private String message;
-    private T data;
+    private List<T> data;
 
-    public ResponseVo(String statusCode, String message, T data) {
+    public ResponseVo(String statusCode, String message, List<T> data) {
         this.statusCode = statusCode;
         this.message = message;
         this.data = data;
@@ -17,7 +20,7 @@ public class ResponseVo<T> {
 
     }
 
-    public ResponseVo<T> success(T data) {
+    public ResponseVo<T> success(List<T> data) {
         this.message = ResponseEnum.SUCCESS.message;
         this.statusCode = ResponseEnum.SUCCESS.code;
         this.data = data;
@@ -46,11 +49,11 @@ public class ResponseVo<T> {
         this.message = message;
     }
 
-    public T getData() {
+    public List<T> getData() {
         return data;
     }
 
-    public void setData(T data) {
+    public void setData(List<T> data) {
         this.data = data;
     }
 }

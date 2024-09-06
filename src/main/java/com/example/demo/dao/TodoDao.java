@@ -7,5 +7,5 @@ import java.util.List;
 
 @Mapper
 public interface TodoDao {
-    List<TodoPo> getTodoList();
+    List<TodoPo> getTodoList(String userId, boolean isDone);
 }

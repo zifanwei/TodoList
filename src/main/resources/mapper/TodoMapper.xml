@@ -5,11 +5,15 @@
 <mapper namespace="com.example.demo.dao.TodoDao">
 
     <select id="getTodoList" resultType="com.example.demo.po.TodoPo">
-        select * from todolist
-<!--        <where>-->
-<!--            <if test="id != null and id != ''">-->
-<!--                and id = #{id}-->
-<!--            </if>-->
-<!--        </where>-->
+        SELECT * FROM todolist
+        <where>
+            AND DATE(deadline) = CURRENT_DATE
+            <if test="userId != null and userId != ''">
+                AND userid = #{userId}
+            </if>
+            <if test="isDone != null">
+                AND isdone = #{isDone}
+            </if>
+        </where>
     </select>
 </mapper>
